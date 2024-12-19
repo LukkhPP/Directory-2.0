@@ -87,3 +87,9 @@ function animate() {
 }
 
 animate();
+
+window.onload = function() {
+  // Your code here
+  console.log('Page has loaded!');
+  onWindowResize();
+};
