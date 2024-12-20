@@ -16,6 +16,7 @@ const container = document.getElementById('container3D');
 container.appendChild(renderer.domElement);
 
 // Setup OrbitControls
+
 const controls = new OrbitControls(camera, renderer.domElement);
 camera.position.set(-500, 900, 900); // Set the camera position
 
@@ -25,6 +26,7 @@ controls.screenSpacePanning = false;
 controls.minDistance = 100;
 controls.maxDistance = 350;
 controls.maxPolarAngle = Math.PI / 2;
+
 controls.update();  // Update controls
 
 // Setup GLTFLoader

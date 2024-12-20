@@ -5,19 +5,17 @@ body{
   
 }
 
-
-.fs-6.d-block.d-md-none, .fs-4.d-none.d-md-block.d-lg-none, .fs-2.d-none.d-lg-block{ /* PIMD LOGO*/
+.main-logo{ /* PIMD LOGO*/
     padding: 15px;
     padding-left: 20px;
-    position: absolute;
+   
     font-family: "Concert One", sans-serif;
     font-style: normal;
     color: rgb(36, 26, 122);
     transition: 0.18s ease-in-out;
 }
 
-.fs-6.d-block.d-md-none:hover, .fs-4.d-none.d-md-block.d-lg-none:hover, .fs-2.d-none.d-lg-block:hover{ /* PIMD LOGO Hover*/
+.main-logo:hover{ /* PIMD LOGO Hover*/
   color:rgb(148, 34, 34);
   opacity: 1;
-  
 }
