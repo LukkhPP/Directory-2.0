@@ -5,17 +5,48 @@ body{
   
 }
 
-.main-logo{ /* PIMD LOGO*/
-    padding: 15px;
-    padding-left: 20px;
-   
+.navbar-brand{ /* PIMD LOGO*/
     font-family: "Concert One", sans-serif;
     font-style: normal;
-    color: rgb(36, 26, 122);
+    font-size: 30px;
+    color: rgb(255, 255, 255);
     transition: 0.18s ease-in-out;
 }
 
-.main-logo:hover{ /* PIMD LOGO Hover*/
-  color:rgb(148, 34, 34);
+.nav-link{ /* PIMD LOGO*/
+  color: rgb(255, 255, 255);
+  transition: 0.18s ease-in-out;
+}
+#weee{
+  box-shadow: 0px 2px 6px rgba(54, 66, 94, 0.527);
+  transition: 0.18s ease-in-out;
+}
+
+#weee:hover{
+  transform:scale(1.08);
+  background: rgb(218,238,255);
+  background: linear-gradient(0deg, rgb(154, 181, 255) 0%, rgba(255,255,255,1) 42%);
+  cursor: pointer;
+}
+
+#weee:active{
+  transform:scale(1);
+  background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(140,173,255,1) 100%);
+  cursor: pointer;
+}
+
+
+.navbar-brand:hover{ /* PIMD LOGO Hover*/
+  color:rgb(5, 6, 77);
   opacity: 1;
+}
+
+.navbar{
+  background-color: rgb(28, 78, 185);
+  
+}
+
+.sidebar{
+  background-color: rgb(106, 144, 226);
 }

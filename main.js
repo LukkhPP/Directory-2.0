@@ -2,17 +2,20 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-let model;
+let model, container, content;
 
 // Setup scene, camera, renderer
+container = document.getElementById('container3D');
+content = document.getElementById('container3D');
+
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+const camera = new THREE.PerspectiveCamera();
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 scene.background = new THREE.Color(0xd6e3ff);
 scene.fog = new THREE.FogExp2(0xd6e3ff, 0.001);
 
 // Append renderer to the container div (not to the body)
-const container = document.getElementById('container3D');
+
 container.appendChild(renderer.domElement);
 
 // Setup OrbitControls
@@ -77,7 +80,9 @@ function onWindowResize() {
     
     // Update renderer size
     renderer.setSize(width, height);
+    
 }
+
 
 window.addEventListener('resize', onWindowResize);
 
@@ -86,6 +91,7 @@ function animate() {
     requestAnimationFrame(animate);
     controls.update();  // Update controls for smooth movement
     renderer.render(scene, camera);
+    onWindowResize()
 }
 
 animate();
