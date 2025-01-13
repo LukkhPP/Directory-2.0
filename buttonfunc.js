@@ -1,6 +1,6 @@
 let namesWithInfo = [];
 let searchTerm;
-let locationxyz;
+let locationxyz, nameDept;
 
 // Load and process CSV data
 async function loadData() {
@@ -42,13 +42,14 @@ function createButtons(data) {
         button.setAttribute("data-bs-dismiss", "offcanvas");
         button.onclick = function () {
             locationxyz = item.PinXYZ;
+            nameDept = item.name;
             //alert(`Name: ${item.name}\nInfo: ${item.info}\nPinXYZ: ${locationxyz}`);
         };
         buttonContainer.appendChild(button);
     });
 }
 
-export {locationxyz};
+export {locationxyz, nameDept};
 // Attach event listener to search bar
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('searchBar').addEventListener('input', filterData);

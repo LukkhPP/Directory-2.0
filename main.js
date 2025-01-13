@@ -5,6 +5,7 @@ import { Line2 } from 'three/addons/lines/Line2.js';
 import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
 import { locationxyz } from './buttonfunc.js'; // Assuming locationxyz is imported from an external module
+import { nameDept } from './buttonfunc.js';
 
 let model, secondModel, humanmodel, FireExt, container, content, raycaster, mouse, isClicked = false;
 let trailGeometry, trailMaterial, trailLine;
@@ -218,6 +219,13 @@ function onMouseClick() {
           isClicked = true;
           clickedModel.material.color.set(new THREE.Color("rgb(28, 78, 185)"));
           clickedModel.scale.set(0.9, 0.9, 0.9);
+
+          const header = document.getElementById('staticBackdropLabel');
+          // Show Bootstrap modal
+          const modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+          modal.show();
+          header.textContent = nameDept;
+
           setTimeout(() => {
               clickedModel.scale.set(1, 1, 1);
               clickedModel.material.color.set(new THREE.Color("rgb(255, 0, 0)"));
