@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Data Buttons</title>
+    <style>
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-container button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Search and Filter Data</h2>
+<input type="text" id="searchBar" placeholder="Search for a name..." oninput="filterData()" />
+<div class="button-container" id="buttonContainer"></div>
+
+<script>
+    let namesWithInfo = [];
+
+    fetch('./public/dept-off.csv')
+        .then(response => response.text())
+        .then(data => {
+            // Split the file by newline and separate names, info, and image source
+            namesWithInfo = data.split('\n').map(line => {
+                const [name, info, imgsrclnk, PinXYZ] = line.split('|').map(item => item.trim());
+                return { name, info, imgsrclnk, PinXYZ };
+            });
+            // Initially populate buttons
+            createButtons(namesWithInfo);
+        })
+        .catch(error => console.error('Error fetching names:', error));
+
+    // Function to filter data based on search input
+    function filterData() {
+        const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+        const filteredData = namesWithInfo.filter(item => item.name.toLowerCase().includes(searchTerm));
+        createButtons(filteredData);
+    }
+
+    // Function to create buttons from data
+    function createButtons(data) {
+        const buttonContainer = document.getElementById('buttonContainer');
+        buttonContainer.innerHTML = ''; // Clear existing buttons
+
+        data.forEach(item => {
+            const button = document.createElement('button');
+            button.textContent = item.name;
+            button.onclick = function() {
+                alert(`Name: ${item.name}\nInfo: ${item.info}\nPinXYZ: ${item.PinXYZ}`);
+            };
+            buttonContainer.appendChild(button);
+        });
+    }
+</script>
+
+</body>
+</html>
