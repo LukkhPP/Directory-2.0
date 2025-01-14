@@ -17,7 +17,7 @@ body{
   color: rgb(255, 255, 255);
   transition: 0.18s ease-in-out;
 }
-#weee{
+#weee, #weeel{
   box-shadow: 0px 2px 6px rgba(54, 66, 94, 0.527);
   transition: 0.18s ease-in-out;
 }

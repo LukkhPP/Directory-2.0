@@ -1,6 +1,6 @@
 let namesWithInfo = [];
 let searchTerm;
-let locationxyz, nameDept;
+let locationxyz, nameDept, imagelink;
 
 // Load and process CSV data
 async function loadData() {
@@ -40,16 +40,23 @@ function createButtons(data) {
         button.style.background = 'rgb(28, 78, 185)';
         button.ariaLabel = 'Close';
         button.setAttribute("data-bs-dismiss", "offcanvas");
+        const imgOFC = document.getElementById('OFCimg');
         button.onclick = function () {
             locationxyz = item.PinXYZ;
             nameDept = item.name;
+            imagelink = item.imgsrclnk;
+
+            
+            if (!imagelink || imagelink === "") {
+                imgOFC.src = "./public/Photo/Default_Photo.png"
+            }else{imgOFC.src = imagelink;}
             //alert(`Name: ${item.name}\nInfo: ${item.info}\nPinXYZ: ${locationxyz}`);
         };
         buttonContainer.appendChild(button);
     });
 }
 
-export {locationxyz, nameDept};
+export {locationxyz, nameDept, imagelink};
 // Attach event listener to search bar
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('searchBar').addEventListener('input', filterData);

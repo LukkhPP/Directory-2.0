@@ -225,6 +225,7 @@ function onMouseClick() {
           const modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
           modal.show();
           header.textContent = nameDept;
+          
 
           setTimeout(() => {
               clickedModel.scale.set(1, 1, 1);
