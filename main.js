@@ -7,7 +7,7 @@ import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
 import { locationxyz } from './buttonfunc.js'; // Assuming locationxyz is imported from an external module
 import { nameDept } from './buttonfunc.js';
 
-let model, secondModel, humanmodel, FireExt, container, content, raycaster, mouse, isClicked = false;
+let model, model2, secondModel, humanmodel, FireExt, container, content, raycaster, mouse, isClicked = false;
 let trailGeometry, trailMaterial, trailLine;
 
 // Setup scene, camera, renderer
@@ -53,6 +53,7 @@ loader.load(
             }
         });
         scene.add(model);
+       
     },
     undefined,
     function (xhr) {
@@ -62,6 +63,7 @@ loader.load(
         console.error('An error happened', error);
     }
 );
+
 
 // Setup GLTFLoader for location pin model
 
