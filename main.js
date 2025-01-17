@@ -7,8 +7,9 @@ import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
 import { locationxyz } from './buttonfunc.js'; // Assuming locationxyz is imported from an external module
 import { nameDept } from './buttonfunc.js';
 
-let model, model2, secondModel, humanmodel, FireExt, container, content, raycaster, mouse, isClicked = false;
+let model, secondModel, humanmodel, FireExt, container, content, raycaster, mouse, isClicked = false;
 let trailGeometry, trailMaterial, trailLine;
+let fireExtCopies = [];
 
 // Setup scene, camera, renderer
 container = document.getElementById('container3D');
@@ -16,8 +17,9 @@ content = document.getElementById('container3D');
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera();
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-scene.background = new THREE.Color(0xd6e3ff);
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true});
+renderer.setClearColor(0x000000, 0);
+//scene.background = new THREE.Color(0xd6e3ff);
 scene.fog = new THREE.FogExp2(0xd6e3ff, 0.001);
 
 // Append renderer to the container div (not to the body)
@@ -155,6 +157,20 @@ loader.load(
       });
       FireExt.visible = false;
       scene.add(FireExt);
+
+      // Create multiple copies of FireExt
+      const positions = [
+          [-100, -20, 50],
+          [50, -20, 100],
+          [100, -20, -50],
+      ]; // Example positions for the copies
+
+      positions.forEach((pos) => {
+          const copy = FireExt.clone(); // Clone the original FireExt
+          copy.position.set(...pos);
+          fireExtCopies.push(copy); // Add to array
+          scene.add(copy); // Add to scene
+      });
   },
   undefined,
   function (xhr) {
@@ -317,7 +333,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function toggleFireExtVisibility() {
   if (FireExt) {
-      FireExt.visible = !FireExt.visible;
+      const isVisible = !FireExt.visible;
+      FireExt.visible = isVisible;
+
+      // Toggle visibility for all copies
+      fireExtCopies.forEach((copy) => {
+          copy.visible = isVisible;
+      });
   }
 }
 
@@ -328,7 +350,15 @@ function animate() {
   if (secondModel && humanmodel) {
       secondModel.lookAt(camera.position);
       humanmodel.lookAt(camera.position);
-      FireExt.lookAt(camera.position);
+      
+      if (FireExt) {
+        FireExt.lookAt(camera.position);
+
+        // Ensure all copies also look at the camera
+        fireExtCopies.forEach((copy) => {
+            copy.lookAt(camera.position);
+        });
+    }
 
       if (trailLine) {
           trailGeometry.setPositions([

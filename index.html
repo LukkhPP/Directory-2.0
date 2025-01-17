@@ -131,9 +131,16 @@
             </li>
             
             <li class="nav-item rounded-3" data-toggle="tooltip" data-placement="right" title="Switch to 2D">
-              <i class="px-2 bg-white rounded-3 d-flex align-items-center" style="font-family: Concert One, sans-serif;
-              font-style: normal; font-size: 40px; color: rgb(106, 144, 226);" id="weee">2D</i>
+              <a href="html.html" class="d-flex align-items-center text-decoration-none">
+                <i class="px-2 bg-white rounded-3" style="font-family: Concert One, sans-serif; font-style: normal; font-size: 40px; color: rgb(106, 144, 226);" id="weee">2D</i>
+              </a>
             </li>
+
+            <li class="nav-item rounded-3" data-toggle="tooltip" data-placement="right" title="Fire Extinguishers">
+              <i class="bi bi-qr-code-scan fs-1 p-2 bg-white rounded-3 d-flex align-items-center"
+                style="color: rgb(106, 144, 226);" id="weee"></i>
+            </li>
+
           </ul>
         </nav>
 
@@ -227,6 +234,22 @@
         sidebar.classList.toggle('d-none');
       }
     </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const navbarBrand = document.querySelector(".navbar-brand");
+
+  // Define the hover behavior
+  navbarBrand.addEventListener("mouseenter", () => {
+    navbarBrand.textContent = "Provincial Interactive Mapping Directory"; // Change text on hover
+    
+  });
+
+  navbarBrand.addEventListener("mouseleave", () => {
+    navbarBrand.textContent = "PIMD"; // Revert text when hover ends
+  });
+});
+</script>
 
 
   </body>
