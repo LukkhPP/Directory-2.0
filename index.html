@@ -16,9 +16,17 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
+      
       body {
         display: flex;
         flex-direction: column;
+      }
+
+      body, html {
+        margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden; /* Prevent scrollbars */
       }
 
       #content {
@@ -120,7 +128,7 @@
         <nav id="sidebar" class="sidebar border-end p-3 d-none d-md-flex">
           <ul class="nav d-flex flex-column align-items-center justify-content-end gap-3 my-3">
             <!-- Department Button -->
-            <li class="nav-item rounded-3" data-toggle="tooltip" data-placement="right" title="Fire Extinguishers" >
+            <li class="nav-item rounded-3" data-toggle="tooltip" data-placement="right" title="Fire Extinguishers">
               <i class="fi fi-br-fire-extinguisher fs-1 p-2 bg-white rounded-3 d-flex align-items-center"
                 style="color: rgb(106, 144, 226);" id="weeel"></i>
             </li>
@@ -218,6 +226,18 @@
       document.getElementById("weeel").addEventListener("click", function () {
         this.classList.toggle("bg-danger");
         this.classList.toggle("bg-white");
+
+        function adjustDivSize() {
+      const fullscreenDiv = document.getElementById('content');
+      fullscreenDiv.style.width = window.innerWidth + 'px';
+      fullscreenDiv.style.height = window.innerHeight + 'px';
+    }
+
+    // Adjust the div size when the page loads and on window resize
+    window.addEventListener('load', adjustDivSize);
+    window.addEventListener('resize', adjustDivSize);
+
+
       });
     </script>
 

@@ -8,7 +8,7 @@ import { locationxyz } from './buttonfunc.js'; // Assuming locationxyz is import
 import { nameDept } from './buttonfunc.js';
 
 let model, secondModel, humanmodel, FireExt, container, content, raycaster, mouse, isClicked = false;
-let trailGeometry, trailMaterial, trailLine;
+let trailGeometry, trailMaterial, trailLine, mixer;
 let fireExtCopies = [];
 
 // Setup scene, camera, renderer
@@ -45,7 +45,7 @@ mouse = new THREE.Vector2();
 // Setup GLTFLoader for the first model (Capitol)
 const loader = new GLTFLoader();
 loader.load(
-    './public/Capitol.glb', // Replace with your model's path
+    './public/kuyba.glb', // Replace with your model's path
     function (gltf) {
         model = gltf.scene;
         model.position.set(40, -20, 20);
@@ -66,6 +66,35 @@ loader.load(
     }
 );
 
+loader.load(
+    './public/scene.glb', // Replace with your model's path
+    function (gltf) {
+        // Add the loaded model to the scene
+        model = gltf.scene;
+        model.position.set(39.5, 58.7, 42.8);
+        model.scale.set(3,3,3);
+        model.traverse((child) => {
+            if (child.isMesh) {
+                child.material.color.set(new THREE.Color("rgb(245, 247, 255)"));
+            }
+        });
+        scene.add(model);
+
+        // Initialize the mixer if animations are present
+        if (gltf.animations && gltf.animations.length) {
+            mixer = new THREE.AnimationMixer(model);
+            const action = mixer.clipAction(gltf.animations[0]); // Use the first animation clip
+            action.play();
+        }
+    },
+    undefined,
+    function (xhr) {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    },
+    function (error) {
+        console.error('An error happened', error);
+    }
+);
 
 // Setup GLTFLoader for location pin model
 
@@ -343,9 +372,15 @@ function toggleFireExtVisibility() {
   }
 }
 
+const clock = new THREE.Clock();
+
+
 function animate() {
   requestAnimationFrame(animate);
   updateSecondModelVisibilityAndPosition();
+
+  const delta = clock.getDelta(); // Get time difference since last frame
+  if (mixer) mixer.update(delta); // Update mixer to progress animation
 
   if (secondModel && humanmodel) {
       secondModel.lookAt(camera.position);

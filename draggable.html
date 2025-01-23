@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draggable Button</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    #messageBubble {
+      transition: top 0.5s ease, left 0.5s ease; /* Increased duration for smoother snapping */
+    }
+  </style>
+</head>
+<body>
+  <div class="container position-relative" style="width: 500px; height: 500px; border: 2px solid black; margin-top: 50px;">
+    <button id="messageBubble" class="shadow position-absolute btn btn-primary text-white d-flex align-items-center rounded-circle justify-content-center" style="width: 100px; height: 100px; cursor: grab;">
+      Message
+    </button>
+  </div>
+
+  <script>
+    const bubble = document.getElementById("messageBubble");
+    const container = bubble.parentElement;
+
+    let isDragging = false;
+    let initialX, initialY, startX, startY; 
+
+    bubble.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      initialX = bubble.offsetLeft;
+      initialY = bubble.offsetTop;
+      startX = e.clientX;
+      startY = e.clientY;
+      bubble.style.cursor = "grabbing";
+
+      // Disable transitions during dragging
+      bubble.style.transition = "none";
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (isDragging) {
+        const deltaX = e.clientX - startX;
+        const deltaY = e.clientY - startY;
+        const newX = initialX + deltaX;
+        const newY = initialY + deltaY;
+
+        // Constrain the button within the container
+        const x = Math.max(0, Math.min(newX, container.clientWidth - bubble.clientWidth));
+        const y = Math.max(0, Math.min(newY, container.clientHeight - bubble.clientHeight));
+
+        bubble.style.left = `${x}px`;
+        bubble.style.top = `${y}px`;
+      }
+    });
+
+    document.addEventListener("mouseup", () => {
+      if (!isDragging) return;
+
+      isDragging = false;
+      bubble.style.cursor = "grab";
+
+      // Re-enable transitions for smooth snapping
+      bubble.style.transition = "top 0.5s ease, left 0.5s ease";
+
+      // Magnetic effect: move to the closest edge of the container
+      const bubbleRect = bubble.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+
+      // Calculate distances to each side of the container
+      const distances = {
+        top: bubbleRect.top - containerRect.top,
+        bottom: containerRect.bottom - bubbleRect.bottom,
+        left: bubbleRect.left - containerRect.left,
+        right: containerRect.right - bubbleRect.right,
+      };
+
+      // Find the closest edge
+      const closestEdge = Object.keys(distances).reduce((a, b) => distances[a] < distances[b] ? a : b);
+
+      // Move the button to the closest edge
+      switch (closestEdge) {
+        case 'top':
+          bubble.style.top = '0px';
+          break;
+        case 'bottom':
+          bubble.style.top = `${container.clientHeight - bubble.clientHeight}px`;
+          break;
+        case 'left':
+          bubble.style.left = '0px';
+          break;
+        case 'right':
+          bubble.style.left = `${container.clientWidth - bubble.clientWidth}px`;
+          break;
+      }
+    });
+  </script>
+</body>
+</html>
