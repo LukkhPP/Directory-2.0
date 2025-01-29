@@ -29,7 +29,7 @@ function filterData() {
 // Create buttons dynamically from data
 function createButtons(data) {
     const buttonContainer = document.getElementById('buttonContainer');
-    buttonContainer.innerHTML = ''; // Clear existing buttons
+    buttonContainer.innerHTML = '';
 
     data.forEach(item => {
         const button = document.createElement('button');
@@ -57,7 +57,6 @@ function createButtons(data) {
 }
 
 export {locationxyz, nameDept, imagelink};
-// Attach event listener to search bar
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('searchBar').addEventListener('input', filterData);
     loadData();

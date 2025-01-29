@@ -4,8 +4,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Line2 } from 'three/addons/lines/Line2.js';
 import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
-import { locationxyz } from './buttonfunc.js'; // Assuming locationxyz is imported from an external module
-import { nameDept } from './buttonfunc.js';
+import { locationxyz } from './components/buttonfunc.js'; // Assuming locationxyz is imported from an external module
+import { nameDept } from './components/buttonfunc.js';
 
 let model, secondModel, humanmodel, FireExt, container, content, raycaster, mouse, isClicked = false;
 let trailGeometry, trailMaterial, trailLine, mixer;
