@@ -4,8 +4,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Line2 } from 'three/addons/lines/Line2.js';
 import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
-import { locationxyz } from './components/buttonfunc.js'; // Assuming locationxyz is imported from an external module
-import { nameDept } from './components/buttonfunc.js';
+import { locationxyz } from '../components/buttonfunc.js'; // Assuming locationxyz is imported from an external module
+import { nameDept } from '../components/buttonfunc.js';
 
 let model, secondModel, humanmodel, FireExt, container, content, raycaster, mouse, isClicked = false;
 let trailGeometry, trailMaterial, trailLine, mixer;
@@ -27,13 +27,14 @@ container.appendChild(renderer.domElement);
 
 // Setup OrbitControls
 const controls = new OrbitControls(camera, renderer.domElement);
-camera.position.set(-500, 900, 900); // Set the camera position
+camera.position.set(-100, 1100, 1100); // Set the camera position
+
 
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
 controls.screenSpacePanning = false;
 controls.minDistance = 100;
-controls.maxDistance = 450;
+controls.maxDistance = 1000;
 controls.maxPolarAngle = Math.PI / 2;
 
 controls.update(); // Update controls
@@ -219,8 +220,13 @@ const dirLight2 = new THREE.DirectionalLight(0x002288, 3);
 dirLight2.position.set(-1, -1, -1);
 scene.add(dirLight2);
 
-const ambientLight = new THREE.AmbientLight(0x555555);
+const ambientLight = new THREE.AmbientLight(0x002288, 2);
 scene.add(ambientLight);
+
+const lightprob = new THREE.LightProbe();
+lightprob.position.set(-1, -1, -1);
+lightprob.intensity = 100;
+scene.add(lightprob);
 
 // Resize handler for responsiveness
 function onWindowResize() {
