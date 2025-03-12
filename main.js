@@ -12,9 +12,10 @@ console.log("GSAP:", gsap);  // Should not be undefined
 
 
 let model, secondModel, humanmodel, FireExt, container, EmergeExit, content, raycaster, mouse, isClicked = false;
-let trailGeometry, trailMaterial, trailLine, mixer;
+let trailGeometry, trailMaterial, trailLine, mixer, fovI;
 let fireExtCopies = [];
 let EmergeExitCopies = [];
+let isTransparentCapitol = false; // Track transparency state
 
 // Setup scene, camera, renderer
 container = document.getElementById('container3D');
@@ -34,19 +35,21 @@ container.appendChild(renderer.domElement);
 const controls = new OrbitControls(camera, renderer.domElement);
 camera.position.set(-500, 900, 900); // Set the camera position
 
+
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
 controls.screenSpacePanning = false;
 controls.minDistance = 100;
 controls.maxDistance = 450;
 controls.maxPolarAngle = Math.PI / 2;
-controls.saveState()
+controls.saveState();
 
 controls.update(); // Update controls
 
 // Add Raycaster and Mouse
 raycaster = new THREE.Raycaster();
 mouse = new THREE.Vector2();
+const direction = new THREE.Vector3();
 
 // Setup GLTFLoader for the first model (Capitol)
 const loader = new GLTFLoader();
@@ -73,6 +76,52 @@ loader.load(
         console.error('An error happened', error);
     }
 );
+
+
+function checkCollision() {
+  if (!model) return true; 
+
+ 
+  camera.getWorldDirection(direction);
+  
+  // Set Raycaster from camera position in the forward direction
+  raycaster.set(camera.position, direction);
+
+  // Get all meshes from the loaded GLTF model
+  const meshes = [];
+  model.traverse((child) => {
+      if (child.isMesh) meshes.push(child);
+  });
+
+  // Check if the ray hits any part of the model
+  const intersects = raycaster.intersectObjects(meshes, true);
+
+  if (intersects.length > 0) {
+        const distance = intersects[0].distance;
+
+        if (distance < 2) { // If camera is too close
+            if (!isTransparentCapitol) { // Only animate once
+                console.log("❌ Collision detected! Making model transparent.");
+                isTransparentCapitol = true;
+               model.visible = false;
+                
+            }
+            return false; // Prevent movement
+        }
+    } 
+    
+    // Restore opacity when no collision
+    if (isTransparentCapitol) {
+        console.log("✅ No collision! Restoring model opacity.");
+        isTransparentCapitol = false;
+
+        model.visible = true;
+        
+        
+    }
+
+    return true; // Allow movement
+}
 
 loader.load(
     './public/Whiteflag.glb', // Replace with your model's path
@@ -529,6 +578,7 @@ const clock = new THREE.Clock();
 function animate() {
   requestAnimationFrame(animate);
   updateLightPosition();
+  checkCollision();
   updateSecondModelVisibilityAndPosition();
   const delta = clock.getDelta(); // Get time difference since last frame
   if (mixer) mixer.update(delta); // Update mixer to progress animation
