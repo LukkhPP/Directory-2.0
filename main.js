@@ -470,12 +470,13 @@ function updateSecondModelVisibilityAndPosition() {
 
       const sound = new Audio('/public/LocationPop.mp3'); // Adjust path based on your folder structure
         sound.volume = 0.15; // Set volume (0.0 to 1.0)
-
+        const rangexyz = 1.4;
+    
       if (!hasAnimated && positionChanged) {
         hasAnimated = true; // Mark animation as played
         controls.reset();
         // 🎯 Move the camera to a good position to look at secondModel
-        const cameraOffset = { x: -x, y: -y, z: -z }; // Adjust distance
+        const cameraOffset = { x: -(x-(x/rangexyz)), y: -(y-(y/rangexyz)), z: -(z-(z/rangexyz)) }; // Adjust distance
         gsap.to(camera.position, {
             x: cameraOffset.x,
             y: cameraOffset.y,
