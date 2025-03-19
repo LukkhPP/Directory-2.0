@@ -28,7 +28,6 @@
         margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden; /* Prevent scrollbars */
       }
 
       #content {
@@ -36,31 +35,9 @@
         min-height: 100vh;
       }
 
-      #container3D {
-      width: calc(100vw - 90px); /* Default width with sidebar */
-      height: calc(100vh - 72px); /* Adjust for navbar */
-  }
-
-  @media (max-width: 768px) { /* Mobile View */
-      #container3D {
-          width: 100vw !important; /* Full width on mobile */
-      }
-  }
-
       #logos {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        /* Align to the right side */
-        display: flex;
         flex-direction: row;
-        /* Arrange images in a row */
-        align-items: center;
-        /* Vertically center images within the row */
-        padding: 10px;
-        /* Optional: Add some padding for spacing */
-        margin: 10px;
-        overflow: hidden;
+
         pointer-events: none;
         user-select: none;
       }
@@ -143,10 +120,19 @@
 
     </div>
 
-    <div id="logos">
-      <img src="/public/PSDN.png" id="PSDNlogo" alt="PSDN Logo">
-      <img src="/public/Photo/Picto.png" id="Pictologo" alt="Picto Logo">
-    </div>
+    <footer class="bg-white py-4 mt-auto">
+      <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+          <div class="col-auto">
+            <div class="small m-0">Copyright &copy; PIMD 2025</div>
+          </div>
+          <div class="col-auto mt-3" id="logos">
+            <img src="/public/PSDN.png" id="PSDNlogo" alt="PSDN Logo">
+            <img src="/public/Photo/Picto.png" id="Pictologo" alt="Picto Logo">
+          </div>
+        </div>
+      </div>
+    </footer>
 
 
   </body>
