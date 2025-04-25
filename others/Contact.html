@@ -1,126 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="/webICON.svg">
-    <title>PIMD</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/oldJS/PIMD logo.svg">
+  <title>PIMD</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/3ed0c6c00c.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/container.css">
-    <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/3ed0c6c00c.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/container.css">
+  <link rel="stylesheet" href="/style.css">
 
-    <style>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    body,
+    html {
       
-      body {
-        display: flex;
-        flex-direction: column;
-      }
-
-      body, html {
-        margin: 0;
+      margin: 0;
       padding: 0;
       height: 100%;
-      }
+    }
 
-      #content {
-        flex-grow: 1;
-        min-height: 100vh;
-      }
+    #content {
+      flex-grow: 1;
+      min-height: 100vh;
+    }
 
-      #logos {
-        flex-direction: row;
+    #logos {
+      flex-direction: row;
 
-        pointer-events: none;
-        user-select: none;
-      }
+      pointer-events: none;
+      user-select: none;
+    }
 
-      #OFCimg {
-        background-color: rgba(106, 144, 226, 0.205);
-        padding: 10px;
-      }
+    #OFCimg {
+      background-color: rgba(106, 144, 226, 0.205);
+      padding: 10px;
+    }
 
-      #logos img {
-        width: 80px;
-        /* Set image width (adjust as needed) */
-        margin-left: 10px;
-        /* Add spacing between images */
-        overflow: hidden;
-        filter: drop-shadow(0px 0px 4px #1876D6);
-        pointer-events: none;
-      }
+    #logos img {
+      width: 80px;
+      /* Set image width (adjust as needed) */
+      margin-left: 10px;
+      /* Add spacing between images */
+      overflow: hidden;
+      filter: drop-shadow(0px 0px 4px #1876D6);
+      pointer-events: none;
+    }
 
-      #logos img:first-child {
-        margin-left: 0;
-        /* Remove margin for the first image */
-        pointer-events: none;
-        overflow: hidden;
-      }
+    #logos img:first-child {
+      margin-left: 0;
+      /* Remove margin for the first image */
+      pointer-events: none;
+      overflow: hidden;
+    }
 
-      .navbar-brand:hover{
-        color: #0f4070;
-        border: 0;
+    .navbar-brand:hover {
+      color: #0d6efd;
+      filter: grayscale();
+      border: 0;
 
-      }
-      
-    </style>
+    }
 
-  </head>
+    .rating-label {
+      cursor: pointer;
+      margin: 10px;
+      text-align: center;
+    }
 
-  <body>
-    <!-- Main content -->
-    <div id="content" class="d-flex flex-column flex-grow-1">
+    .rating-label input[type="radio"] {
+      display: none;
+    }
 
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg border-bottom shadow-sm">
-        <div class="container-fluid">
+    .rating-label img {
+      border: 2px solid transparent;
+      border-radius: 10px;
+      padding: 8px;
+      transition: all 0.2s ease;
+    }
 
-          <a class="navyG navbar-brand" style="user-select: none;" href="/index.html">PIMD</a>
+    .rating-label input[type="radio"]:checked+img {
+      box-shadow: 0 0 10px rgba(0, 7, 14, 0.5);
+      filter: grayscale();
+    }
 
-          <button class="navbar-toggler bg-white py-2" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <i class="fa fa-bars" style="color: rgb(28, 78, 185)"></i>
-          </button>
+    .rating-label span {
+      display: block;
+      margin-top: 5px;
+    }
+  </style>
 
-          <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link" style="user-select: none;" href="/others/About.html">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" style="user-select: none;" href="#">Contact</a>
-              </li>
-            </ul>
+</head>
+
+<body>
+  <!-- Main content -->
+  <div id="content" class="d-flex flex-column flex-grow-1">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg border-bottom shadow-sm">
+      <div class="container-fluid">
+        
+        <a class="navyG navbar-brand align-items-center text-center" style="user-select: none; margin-left: 5px;" href="/index.html"> <img src="/oldJS/PIMD logo.svg" alt="Terrible" width="40" height="40" style="margin-right: 3px;"><strong style="bottom: 0; padding-top: 10px;">PIMD</strong></a>
+
+        <button class="navbar-toggler bg-white py-2" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fa fa-bars" style="color: rgb(28, 78, 185)"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" style="user-select: none;" href="/others/About.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="user-select: none;" href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <!-- About Section-->
+    <section class="py-5 mt-4">
+      <div class="container px-5">
+        <div class="row gx-5 justify-content-center gap-5">
+          <div class="col-xxl-5 ">
+            <div class="my-5">
+
+              <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">Contact Us</span></h2>
+              <p class="text-muted mb-3 mt-3 lh-lg">For inquiries, assistance, or further information, please don’t
+                hesitate to contact us.
+              </p>
+              <i class="text-primary bi bi-telephone me-2 fs-4"></i> <a
+                class="text-dark text-decoration-none position-relative" style="bottom: 2px;">+63 921 517 1860 <br></a>
+              <i class="text-primary bi bi-envelope me-2 fs-4"></i> <a
+                class="text-dark text-decoration-none position-relative" style="bottom: 2px;"
+                href="https://mail.google.com/mail/?view=cm&to=picto.sdn@gmail.com"
+                target="_blank">picto.sdn@gmail.com<br></a>
+
+                <i class="text-primary bi bi-chat me-2 fs-4"></i> <a
+                class="text-dark text-decoration-none position-relative" style="bottom: 2px;"
+                href="https://facebook.com/PICTOSDN"
+                target="_blank">facebook.com/PICTOSDN<br></a>  
+
+                <i class="text-primary bi bi-instagram me-2 fs-4"></i> <a
+                class="text-dark text-decoration-none position-relative" style="bottom: 2px;"
+                href="https://instagram.com/picto.sdn2025"
+                target="_blank">instagram.com/picto.sdn2025/<br></a>  
+
+              <i class="text-primary bi bi-geo-alt me-2 fs-4"></i>
+              <a class="text-dark text-decoration-none d-inline-flex flex-wrap position-relative" style="bottom: 2px;"
+                href="https://www.google.com/maps/place/Surigao+del+Norte+Provincial+Capitol/@9.781578,125.4875766,17.81z/data=!4m14!1m7!3m6!1s0x330136c87e10bb23:0xe3d819b31db549c4!2sSurigao+del+Norte+Provincial+Capitol!8m2!3d9.7814513!4d125.4885908!16s%2Fg%2F1v9ggj90!3m5!1s0x330136c87e10bb23:0xe3d819b31db549c4!8m2!3d9.7814513!4d125.4885908!16s%2Fg%2F1v9ggj90?entry=ttu&g_ep=EgoyMDI1MDQwOC4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank">Provincial Capitol Road, Surigao City, <br>Surigao del Norte, Philippines</a>
+            </div>
+          </div>
+
+          <div class="col-xxl-6 justify-content-center my-6 p-4 bg-white rounded-4 shadow-lg mb-3">
+            <div class="ms-3 mt-2 me-3">
+              <h2 class="display-5 fw-bolder fs-5 text-primary"><span class="text-gradient d-inline">Give
+                  feedback</span></h2>
+              <p class="text-muted mb-3 mt-3 ">Give us your feedback to help improve this website/websystem. How would
+                you rate your experience?
+              </p>
+
+              <form id="feedbackForm" autocomplete="off">
+                <div class="text-muted">
+                  <div class="d-flex justify-content-center flex-wrap gap-1">
+                    <label class="rating-label">
+                      <input type="radio" name="entry.1418327391" value="Terrible">
+                      <img src="/Icons/Dissatisfied.svg" alt="Terrible" width="75" height="75">
+                      <span>Terrible</span>
+                    </label>
+
+                    <label class="rating-label">
+                      <input type="radio" name="entry.1418327391" value="Bad">
+                      <img src="/Icons/Bad.svg" alt="Bad" width="75" height="75">
+                      <span>Bad</span>
+                    </label>
+
+                    <label class="rating-label">
+                      <input type="radio" name="entry.1418327391" value="Neutral">
+                      <img src="/Icons/Neutral.svg" alt="Neutral" width="75" height="75">
+                      <span>Neutral</span>
+                    </label>
+
+                    <label class="rating-label">
+                      <input type="radio" name="entry.1418327391" value="Good">
+                      <img src="/Icons/Good.svg" alt="Good" width="75" height="75">
+                      <span>Good</span>
+                    </label>
+
+                    <label class="rating-label">
+                      <input type="radio" name="entry.1418327391" value="Amazing">
+                      <img src="/Icons/Satisfied.svg" alt="Amazing" width="75" height="75">
+                      <span>Amazing</span>
+                    </label>
+                  </div>
+
+                  <div class="mt-4 d-flex flex-column flex-md-row align-items-start align-items-md-center">
+                    <label for="email" class="form-label mb-2 mb-md-0 me-md-3" style="white-space: nowrap;">Enter your
+                      email:</label>
+                    <input type="email" id="email" name="entry.2052566707" class="form-control"
+                      placeholder="Enter your email" autocomplete="off">
+                  </div>
+
+                  <div class="mt-2">
+                    <label for="comment" class="form-label">Leave a comment <i>(Optional)</i>:</label>
+                    <textarea class="form-control" id="comment" name="entry.1013660555" rows="4"
+                      placeholder="Help us improve this website by leaving a comment..."></textarea>
+                  </div>
+
+                  <div class="form-check mt-3">
+                    <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                    <label class="form-check-label" for="termsCheck" style="font-size: 13px; font-style: italic;">
+                      I agree that my feedback, including my email and comments, will be collected solely for evaluation
+                      purposes and will be kept strictly confidential in accordance with our data privacy policy.
+                      <a style="font-size: 13px; font-style: italic;" href="#" data-bs-toggle="modal" data-bs-target="#dataPrivacyModal">(Read About Data Privacy)</a>
+                    </label>
+                  </div>
+
+                  <div class="mt-3 text-center mb-3 mt-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+              </form>
+
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.getElementById('feedbackForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Stop default form submission
+
+        const form = e.target;
+        const formData = new FormData(form);
+
+        // ✅ Check if a rating is selected entry.2052566707
+
+        const ratingSelected = form.querySelector('input[name="entry.1418327391"]:checked');
+        const emailSelected = form.querySelector('input[name="entry.2052566707"]:checked');
+        const terms = document.getElementById('termsCheck');
+
+        
+
+        if (!terms.checked) {
+          terms.style.display = 'block';
+          return;
+
+        } else if (!ratingSelected && !emailSelected) {
+          alert("Please select a rating and fill-up your email before submitting!");
+          return;
+        } else
+
+          // Submit via fetch
+          fetch('https://docs.google.com/forms/d/e/1FAIpQLSfNHmWhx5ACUqBH9Z-b_ykwa7EKynjTxWWoCIhEQ_w9nZbwaw/formResponse', {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+          }).then(() => {
+            const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+            modal.show();
+            form.reset();
+          }).catch((error) => {
+            alert("Something went wrong. Please try again later.");
+            console.error(error);
+          });
+      });
+    </script>
+
+<div class="modal fade" id="dataPrivacyModal" tabindex="-1" aria-labelledby="dataPrivacyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="dataPrivacyModalLabel">Data Privacy Act of 2012</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="max-height: 75vh; overflow-y: auto; font-size: 0.95rem;">
+        <p><strong>The Data Privacy Act of 2012 (Republic Act No. 10173): A Cornerstone of Digital Rights in the Philippines with Significant Penalties for Non-Compliance</strong></p>
+
+        <p>Enacted on August 15, 2012, and swiftly becoming enforceable on September 8, 2012, the Data Privacy Act of 2012 (Republic Act No. 10173) stands as a landmark piece of legislation in the Philippines. More than just a regulatory framework, it represents a significant stride towards recognizing and safeguarding the fundamental human right to privacy in an increasingly digital age. The Act strategically aims to strike a delicate balance: empowering the free flow of information crucial for a vibrant society and fostering innovation and economic growth, all while establishing robust safeguards for individuals against the potential harms of unchecked data processing.
+
+          Its comprehensive scope extends to the processing of all forms of personal data by any natural or juridical person operating within the Philippines, encompassing both governmental bodies and private sector entities. This broad applicability underscores the nation's commitment to ensuring data protection across all spheres of activity.
+          
+          At the heart of the Act's implementation and enforcement lies the National Privacy Commission (NPC). Established as an independent body, the NPC plays a pivotal role in interpreting the law, issuing guidelines, investigating complaints, and ultimately ensuring compliance. Its independence is crucial for maintaining impartiality and fostering public trust in the protection of personal data.
+          
+          The Act meticulously defines personal data as any information, whether recorded physically or digitally, that can directly or indirectly identify an individual. Recognizing the heightened sensitivity of certain information, the law also distinguishes sensitive personal information, which warrants a more rigorous level of protection. This category includes details concerning an individual's race, ethnic origin, religious beliefs, philosophical beliefs, political opinions, health, sexual life, genetic data, biometric data, marital status, age, and any government-issued identifiers. The specific inclusion of these categories reflects a deep understanding of the potential for discrimination and harm if such information is mishandled.
+          
+          Crucially, the Data Privacy Act empowers individuals by granting them a suite of data subject rights. These rights are not merely abstract concepts but tangible entitlements that allow individuals to exercise control over their personal information. These rights include:</p>
+        
+        <p><strong>Key Rights of Data Subjects:</strong></p>
+        <ul>
+          <li><strong>Right to be Informed:</strong> Individuals have the right to be informed about the nature, purpose, and extent of the processing of their personal data.</li>
+          <li><strong>Right to Access</strong>: Data subjects are entitled to obtain a copy of their personal data being processed.</li>
+          <li><strong>Right to Object</strong>: Individuals can object to the processing of their personal data under specific circumstances.</li>
+          <li><strong>Right to Rectification</strong>: Data subjects have the right to correct inaccuracies or update incomplete personal data.</li>
+          <li><strong>Right to Erasure or Blocking</strong>: Under certain conditions, individuals can request the removal or suspension of the processing of their personal data.</li>
+          <li><strong>Right to Damages</strong>: Data subjects are entitled to compensation for damages sustained due to violations of the Act.</li>
+          <li><strong>Right to Data Portability</strong>: Individuals have the right to receive their personal data in a machine-readable format and transmit it elsewhere.</li>
+        </ul>
+
+        <p>Beyond granting rights, the Act mandates compliance from organizations that process personal data. This includes implementing reasonable and appropriate security measures to prevent unauthorized access, loss, 
+          destruction, or alteration of personal information. It also emphasizes the principles of transparency, legitimate purpose, and proportionality in data processing activities. Organizations are expected to be accountable for their data processing practices and to ensure that they are adhering to the standards set forth by the Act and the NPC.
+          Crucially, the Data Privacy Act of 2012 carries significant penalties for non-compliance,underscoring the seriousness with which data privacy is treated in the Philippines. These penalties are tiered based on the nature and severity of the violation and can include:</p>
+
+        <p><strong>Penalties for Non-Compliance:</strong></p>
+        <ul>
+          <li><strong>Imprisonment:</strong> Ranges from 1 to 7 years depending on the offense.</li>
+          <li><strong>Substantial Fines:</strong> PHP 100,000 to PHP 5,000,000.</li>
+          <li><strong>Both Imprisonment and Fines</strong>: Serious violations may result in both.</li>
+          <li><strong>Administrative Sanctions</strong>: Imposed by the NPC including cease and desist orders, breach notifications, etc.</li>
+        </ul>
+
+        <p>In conclusion, the Data Privacy Act of 2012 is a vital legal framework that underpins digital citizenship in the Philippines. It not only codifies the right to privacy 
+          in the digital sphere and establishes a comprehensive system of rights and obligations but also enforces its provisions through a robust regime of significant penalties 
+          for non-compliance, thereby fostering a more secure and trustworthy data ecosystem. As technology continues to evolve, the Act serves as a crucial foundation for navigating the complexities of data in the 21st century, ensuring that innovation and progress are balanced with the fundamental rights and freedoms of every Filipino.<br><br></p>
+
+        <a href="https://privacy.gov.ph/data-privacy-act/" target="_blank">>>>> READ THE WHOLE DATA PRIVACY ACT OF 2012 (REPUBLIC ACT 10173) <<<<</a>
+
+        <p class="text-muted"><br><br><i><strong>References:</strong></i></p>
+
+        <p class="text-muted" style="font-size: 14px;">Pawarjanhavi. (2024, April 29). <i>Exploring data protection schemes: A comprehensive guide. Medium.</i> Retrieved from <a href="https://medium.com/@pawarjanhavi80/exploring-data-protection-schemes-a-comprehensive-guide-388f2d222df8">https://medium.com/@pawarjanhavi80/exploring-data-protection-schemes-a-comprehensive-guide-388f2d222df8</a></p>
+        <p class="text-muted" style="font-size: 14px;">Respicio & Co. (2024, April 14). <i>Data privacy Philippines.</i> Retrieved from <a href="https://www.respicio.ph/commentaries/data-privacy-philippines">https://www.respicio.ph/commentaries/data-privacy-philippines</a></p>
+        <p class="text-muted" style="font-size: 14px;">National Privacy Commission. (n.d.). <i>Data Privacy Act.</i> Retrieved from <a href="https://privacy.gov.ph/data-privacy-act/">https://privacy.gov.ph/data-privacy-act/</a><br><br></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+          <div class="modal-header">
+            
+            <h5 class="modal-title w-100" id="confirmationModalLabel">Thank you!</h5>
+          </div>
+          <div class="modal-body">
+            Your feedback has been recorded.
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
-      </nav>
-
-
-        <!-- Content Container -->
-        <div class="container-fluid border-end d-flex align-items-center justify-content-center text-center position-relative border-0 expa" 
-     id="container3D" 
-     style="padding: 0px;">
-     
-
-
-
-
-
-
-
       </div>
-
     </div>
 
-    <footer class="bg-white py-4 mt-auto">
+
+
+
+
+    <footer class="bg-white py-2 mt-auto">
       <div class="container px-5">
         <div class="row align-items-center justify-content-between flex-column flex-sm-row">
           <div class="col-auto">
@@ -133,8 +385,15 @@
         </div>
       </div>
     </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
 
+    <canvas class="position-absolute" id="particleCanvas" style="z-index: -1; top: 0; left: 0;"></canvas>
 
-  </body>
+    <script type="module" src="Particle.js"></script>
+
+</body>
 
 </html>
