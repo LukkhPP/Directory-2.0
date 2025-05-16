@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body{
+  background-color: rgb(234, 245, 255);
+  
+}
+
+.navyG{ /* PIMD LOGO*/
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-size: 33px;
+    color: rgb(16, 46, 77);
+    transition: 0.18s ease-in-out;
+}
+
+.hubApp{
+  font-family: "Concert one", sans-serif;
+    font-style: normal;
+    color: rgb(16, 46, 77);
+    transition: 0.18s ease-in-out;
+}
+
+.nav-link{ /* PIMD LOGO*/
+  color: rgb(16, 46, 77);
+  transition: 0.18s ease-in-out;
+}
+#weee, #weeel, #whut{
+  box-shadow: 0px 2px 6px rgba(54, 66, 94, 0.527);
+  transition: 0.18s ease-in-out;
+  
+}
+
+#weee:hover{
+  transform:scale(1.08);
+  
+  background: linear-gradient(0deg, rgb(28, 55, 81) 0%, rgba(255, 255, 255, 0) 42%);
+  cursor: pointer;
+}
+
+
+#weee:active{
+  transform:scale(1);
+  background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(28, 55, 81 ,1) 100%);
+  cursor: pointer;
+}
+
+.weeel-active{
+  background-image: linear-gradient(to right, #7b4397 0%, #dc2430  51%, #7b4397  100%);
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;          
+
+   border-radius: 10px;
+   display: block;
+ }
+
+ .wat-active{
+  background-image: linear-gradient(to right, #F09819 0%, #EDDE5D  51%, #F09819  100%);
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;          
+
+   border-radius: 10px;
+   display: block;
+ }
+
+ 
+ 
+ 
+
+#weeel:active, #whut:active{
+  transform:scale(1);
+  filter: grayscale(99);
+  cursor: pointer;
+}
+
+#weeel:hover, #whut:hover{
+  transform:scale(1.08);
+  cursor: pointer;
+}
+
+
+
+ .weeel-active:hover, .wat-active:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+   cursor: pointer;
+   
+ }
+
+
+
+
+.navyG:hover{ /* PIMD LOGO Hover*/
+  color: rgb(16, 46, 77);
+  opacity: 1;
+}
+
+.navbar{
+  background-color: rgb(255, 255, 255);
+  
+}
+
+.sidebar{
+  background-color: rgb(16, 46, 77);
+  box-shadow: 0px 2px 6px rgba(16, 46, 77, 0.527);
+}
+
+

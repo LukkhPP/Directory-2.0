@@ -1,6 +1,6 @@
 let namesWithInfo = [];
 let searchTerm;
-let locationxyz, nameDept, imagelink;
+let locationxyz, nameDept, imagelink, location2d;
 
 // Load and process CSV data
 async function loadData() {
@@ -8,8 +8,8 @@ async function loadData() {
         const response = await fetch('./public/dept-off.csv');
         const data = await response.text();
         namesWithInfo = data.split('\n').map(line => {
-            const [name, info, imgsrclnk, PinXYZ] = line.split('|').map(item => item.trim());
-            return { name, info, imgsrclnk, PinXYZ };
+            const [name, info, imgsrclnk, PinXYZ, Pin2dXYZ] = line.split('|').map(item => item.trim());
+            return { name, info, imgsrclnk, PinXYZ, Pin2dXYZ };
         });
         createButtons(namesWithInfo);
     } catch (error) {
@@ -37,7 +37,20 @@ function createButtons(data) {
         button.className = 'p-2 border-0 rounded-3 my-1 btnoffCanvas';
         button.style.color = 'white';
         button.id = 'btnoffCNS';
-        button.style.background = 'rgb(24, 118, 214)';
+
+        const currentPage = window.location.pathname;
+
+        // Check if it's index.html or index2d.html
+        if (currentPage.endsWith('index.html')) {
+            console.log('You are on index.html');
+            button.style.background = 'rgb(24, 118, 214)';
+        } else if (currentPage.endsWith('index2D.html')) {
+            console.log('You are on index2D.html');
+            button.style.background = 'rgb(16, 46, 77)';
+        } else {
+            console.log('You are on another page');
+        }
+        
         button.ariaLabel = 'Close';
         button.setAttribute("data-bs-dismiss", "offcanvas");
         const imgOFC = document.getElementById('OFCimg');
@@ -45,17 +58,18 @@ function createButtons(data) {
             locationxyz = item.PinXYZ;
             nameDept = item.name;
             imagelink = item.imgsrclnk;
+            location2d = item.Pin2dXYZ;
 
             if (!imagelink || imagelink === "") {
                 imgOFC.src = "./public/Photo/Default_Photo.png"
-            }else{imgOFC.src = imagelink;}
+            } else { imgOFC.src = imagelink; }
             //alert(`Name: ${item.name}\nInfo: ${item.info}\nPinXYZ: ${locationxyz}`);
         };
         buttonContainer.appendChild(button);
     });
 }
 
-export {locationxyz, nameDept, imagelink};
+export { locationxyz, nameDept, imagelink, location2d };
 // Attach event listener to search bar
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('searchBar').addEventListener('input', filterData);
