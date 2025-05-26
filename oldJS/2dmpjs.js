@@ -10,7 +10,7 @@ let raycaster = new THREE.Raycaster();
 let mouse = new THREE.Vector2();
 let clock = new THREE.Clock();
 
-let svgGroup, secondModel;
+let svgGroup, secondModel, humanmodel;
 let isClicked = false;
 
 let hasAnimated = false;
@@ -143,6 +143,8 @@ function loadGLTFModel() {
         setupEventListeners();
         animate();
     });
+    
+    
 }
 
 function parseCSS(style) {
